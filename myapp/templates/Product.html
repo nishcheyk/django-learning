@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Product</title>
+    <script>
+        function submitProduct(event) {
+            event.preventDefault(); // Prevent traditional form submission
+            const name = document.querySelector('input[name="name"]').value;
+            const price = document.querySelector('input[name="price"]').value;
+            const description = document.querySelector('textarea[name="description"]').value;
+
+            fetch("/save-json/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ name, price, description }),
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message || data.error))
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Add a New Product</h2>
+    <form onsubmit="submitProduct(event)">
+        <label>Name:</label>
+        <input type="text" name="name" required><br>
+        <label>Price:</label>
+        <input type="number" name="price" required><br>
+        <label>Description:</label>
+        <textarea name="description"></textarea><br>
+        <button type="submit">Save Product</button>
+    </form>
+</body>
+</html>
