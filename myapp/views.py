@@ -52,3 +52,24 @@ def save_product_json(request):
             return JsonResponse({"error": "Invalid JSON format"}, status=400)
 
     return render(request, "Product.html") or HttpResponse("Template not found", status=404)
+
+
+
+from .forms import ProfileForm
+from .models import Profile
+
+def upload_profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('profile-list')
+    else:
+        form = ProfileForm()
+    return render(request, 'upload_profile.html', {'form': form})
+
+
+def profile_list(request):
+    profiles = Profile.objects.all()
+    return render(request, 'profile_list.html', {'profiles': profiles})
+
