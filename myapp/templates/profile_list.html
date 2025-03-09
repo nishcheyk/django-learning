@@ -5,7 +5,7 @@
         <h3>{{ profile.name }}</h3>
         <p>{{ profile.bio }}</p>
         {% if profile.profile_picture %}
-            <img src="{{ profile.profile_picture.url }}" alt="{{ profile.name }}" style="max-height: 200px;">
+            <img src="{{ profile.profile_picture.url }}" alt="{{ profile.name }}" style="max-height: 100px;">
         {% else %}
             <p>No profile picture uploaded.</p>
         {% endif %}
