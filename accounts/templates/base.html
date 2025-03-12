@@ -1,14 +1,13 @@
-{%load static%}
-
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}My Site{% endblock %}</title>
+    <title>Django Auth System</title>
     <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
 </head>
 <body>
+
     <nav>
         <a href="{% url 'home' %}">Home</a>
         {% if user.is_authenticated %}
@@ -20,21 +19,15 @@
         {% endif %}
     </nav>
 
-    {% if messages %}
-        <div class="messages">
+    <div class="content">
+        {% if messages %}
             {% for message in messages %}
-                <p>{{ message }}</p>
+                <p class="message">{{ message }}</p>
             {% endfor %}
-        </div>
-    {% endif %}
+        {% endif %}
 
-    <header>
-        <h1>Site Header</h1>
-    </header>
+        {% block content %}{% endblock %}
+    </div>
 
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
 </body>
 </html>

@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'myapp',
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'myproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-       'DIRS': [BASE_DIR / "templates", BASE_DIR / "myapp/templates"],
+       'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,13 +125,16 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#added manually
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'myapp/static')
-]
 
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = 'static/'
 
+# Do NOT include STATICFILES_DIRS if you're using app-level static folders.
+# STATICFILES_DIRS = [BASE_DIR / "static"]  # REMOVE OR COMMENT THIS LINE
 
+STATIC_ROOT = BASE_DIR / "staticfiles"  # For collectstatic (optional in development)
+
+# Media files (user uploads)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
